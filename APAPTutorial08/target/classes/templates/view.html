@@ -5,6 +5,10 @@
     </head>
     <body>
     		<div th:replace="fragments/header :: nav"></div>
+    		<h4 th:text="'Login as '+ ${#httpServletRequest.remoteUser}">Login as</h4>
+       	<form th:action="@{/logout}" method="post">
+       		<input type="submit" value="Sign out"/>
+       	</form>
        	<h3 th:text="'NPM = ' + ${student.getNpm()}">Student NPM</h3>
        	<h3 th:text="'Name = ' + ${student.getName()}">Student Name</h3>
        	<h3 th:text="'GPA = ' + ${student.getGpa()}">Student GPA</h3>
