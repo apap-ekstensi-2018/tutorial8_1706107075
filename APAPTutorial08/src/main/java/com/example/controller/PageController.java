@@ -19,4 +19,10 @@ public class PageController {
         return "login";
     }
 	
+	@RequestMapping("/logout")
+    public String logout ()
+    {
+        return "login";
+    }
+	
 }

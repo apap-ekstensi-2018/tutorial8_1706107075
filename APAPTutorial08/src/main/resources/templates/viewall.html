@@ -27,6 +27,10 @@
 	       	<hr/>
        	</div> -->
        	<div th:replace="fragments/header :: nav"></div>
+       	<h4 th:text="'Login as '+ ${#httpServletRequest.remoteUser}">Login as</h4>
+       	<form th:action="@{/logout}" method="post">
+       		<input type="submit" value="Sign out"/>
+       	</form>
      	<table id="table-id" class="display">
      		<thead>
      			<tr>
