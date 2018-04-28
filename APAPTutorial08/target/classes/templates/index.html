@@ -8,6 +8,10 @@
 		<h2>Welcome</h2>
 		<a href="/login">Login</a>
 		<a th:if="${#httpServletRequest.isUserInRole('ADMIN')}" href="/student/viewall">View All Student</a><br/>
+ 		<form th:if="${#httpServletRequest.isUserInRole('USER') || #httpServletRequest.isUserInRole('ADMIN')}" th:action="@{/student/view}" method="get">
+ 			<div><label> NPM : <input type="text" name="npm"/></label></div>
+ 			<div><input type="submit" value="Lihat"/></div>
+ 		</form>
 		<!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<a class="navbar-brand" href="#">Navbar</a>
 			<button class="navbar-toggler" type="button" data-tonggle="collapse" 
