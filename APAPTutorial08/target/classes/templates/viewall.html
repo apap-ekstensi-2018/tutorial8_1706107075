@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title th:replace="fragments/header :: header(title=${title})"></title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css"/>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+        <script>
+     		$(document).ready(function(){
+     			$('#table-id').dataTable();
+     		});
+     	</script>
+    </head>
+    <body>
+        <!-- <h1>All Students</h1>
+        
+    		<div th:each="student,iterationStatus: ${students}" th:class="${iterationStatus.odd} ? 'odd'">
+            <h3 th:text="'No. ' + ${iterationStatus.count}">No. 1</h3>
+	       	<h3 th:text="'NPM = ' + ${student.getNpm()}">Student NPM</h3>
+	       	<h3 th:text="'Name = ' + ${student.getName()}">Student Name</h3>
+	       	<h3 th:text="'GPA = ' + ${student.getGpa()}">Student GPA</h3>
+	       	<h3 th:if="${student.getGpa()>=3.49}">Cum Laude!</h3>
+	       	<h3 th:unless="${student.getGpa()>=3.49}">Sangat Memuaskan!</h3>
+	       	<h3 th:text="${student.getGpa()>=3.49} ? 'Cum Laude!' : 'Sangat Memuaskan'"></h3>
+	       	<a th:href="'/student/delete/' + ${student.getNpm()}"> Delete Data</a><br></br>
+	       	<a th:href="'/student/update/' + ${student.getNpm()}"> Update Data</a>
+	       	<hr/>
+       	</div> -->
+       	<div th:replace="fragments/header :: nav"></div>
+     	<table id="table-id" class="display">
+     		<thead>
+     			<tr>
+     				<th>No</th>
+     				<th>NPM</th>
+     				<th>Name</th>
+     				<th>GPA</th>
+     				<th>Keterangan</th>
+     				<th></th>
+     				<th></th>
+     			</tr>
+     		</thead>
+     		<tbody>
+     			<tr th:each="student,iterationStatus: ${students}" th:class="${iterationStatus.odd} ? 'odd'">
+     				<td th:text="${iterationStatus.count}" align="center">No. 1</td>
+     				<td th:text="${student.getNpm()}" align="center">Student NPM</td>
+     				<td th:text="${student.getName()}" align="center">Student Name</td>
+     				<td th:text="${student.getGpa()}" align="center">Student GPA</td>
+     				<td th:text="${student.getGpa()>=3.49} ? 'Cum Laude!' : 'Sangat Memuaskan'" align="center"></td>
+     				<td><a th:href="'/student/delete/' + ${student.getNpm()}"> Delete</a></td>
+     				<td><a th:href="'/student/update/' + ${student.getNpm()}"> Update</a></td>
+     			</tr>
+     		</tbody>
+     	</table>
+     	
+    </body>
+</html>
