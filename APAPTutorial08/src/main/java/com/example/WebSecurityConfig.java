@@ -1,4 +1,5 @@
 package com.example;
+import org.apache.tomcat.jdbc.pool.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -29,14 +30,24 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		 .permitAll();
 	}
 	
+//	@Autowired
+//	public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception
+//	{
+//	 auth.inMemoryAuthentication()
+//	 .withUser("admin").password("admin")
+//	 .roles("ADMIN");
+//	 auth.inMemoryAuthentication()
+//	 .withUser("user").password("user")
+//	 .roles("USER");
+//	}
+	
 	@Autowired
-	public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception
-	{
-	 auth.inMemoryAuthentication()
-	 .withUser("admin").password("admin")
-	 .roles("ADMIN");
-	 auth.inMemoryAuthentication()
-	 .withUser("user").password("user")
-	 .roles("USER");
+	DataSource dataSource;
+	
+	@Autowired
+	public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+		auth.jdbcAuthentication().dataSource(dataSource)
+		  .usersByUsernameQuery("select username, password, enabled from users where username=?")
+		  .authoritiesByUsernameQuery("select username, role from user_roles where username=?");
 	}
 }
